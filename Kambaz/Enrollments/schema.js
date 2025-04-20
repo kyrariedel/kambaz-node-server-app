@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const enrollmentSchema = new mongoose.Schema(
+const schema = new mongoose.Schema(
  {
    _id: String,
    course: { type: String, ref: "CourseModel" },
@@ -15,4 +15,4 @@ const enrollmentSchema = new mongoose.Schema(
  },
  { collection: "enrollments" }
 );
-export default enrollmentSchema;
+export default schema;
