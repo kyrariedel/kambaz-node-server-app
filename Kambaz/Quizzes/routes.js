@@ -43,7 +43,6 @@ export default function QuizzesRoutes(app) {
       const quiz = {
         ...req.body,
         course: courseId,
-        createdBy: _id
       };
       const newQuiz = await dao.createQuiz(quiz);
       res.status(201).json(newQuiz);

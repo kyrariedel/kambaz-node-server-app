@@ -13,8 +13,14 @@ import QuestionRoutes from './Kambaz/Questions/routes.js';
 
 import mongoose from "mongoose";
 import "dotenv/config";
-const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
-mongoose.connect(CONNECTION_STRING);
+const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/Kambaz"
+mongoose.connect(CONNECTION_STRING)
+  .then(() => {
+    console.log("Connected to the correct database");
+    console.log("Current database:", mongoose.connection.name);
+  })
+  .catch(err => console.error("Database connection error:", err));
+
 const app = express();
 app.use(cors({
     credentials: true,
@@ -24,12 +30,12 @@ app.use(cors({
  const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kambaz",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true, // was false
   };
   if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
-      sameSite: "none",
+      sameSite: "lax", // was none
       secure: true,
       domain: process.env.NODE_SERVER_DOMAIN,
     };

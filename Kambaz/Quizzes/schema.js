@@ -29,8 +29,7 @@ const schema = new mongoose.Schema(
     dueDate: Date,
     availableDate: Date,
     availableUntilDate: Date,
-    published: { type: Boolean, default: false },
-    createdBy: { type: String, ref: "UserModel" }
+    published: { type: Boolean, default: false }
   },
   { collection: "quizzes" }
 );
